@@ -133,7 +133,7 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}/artifacts:/artifacts"
           run: |
-            uname
+            uname -a
   upload:
     needs: [build, arch-build]
     runs-on: ubuntu-latest
