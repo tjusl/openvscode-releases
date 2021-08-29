@@ -133,7 +133,11 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}/artifacts:/artifacts"
           run: |
-            uname -a
+            git clone https://github.com/gitpod-io/vscode --depth=1 --branch web-server
+            cd vscode
+            yarn
+            yarn gulp server-min
+            ls -R
   upload:
     needs: [build, arch-build]
     runs-on: ubuntu-latest
