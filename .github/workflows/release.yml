@@ -116,8 +116,23 @@ jobs:
         with:
           name: ${{ runner.os }}-x64
           path: ${{ env.ARCHIVE_FULL_NAME }}
+  arch-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - uses: uraimo/run-on-arch-action@v2.0.5
+        name: Run commands
+        id: runcmd
+        with:
+          arch: armv7
+          distro: ubuntu18.04
+
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
+          run: |
+            uname
   upload:
-    needs: build 
+    needs: [build, arch-build]
     runs-on: ubuntu-latest
     name: Create the release
     steps:
