@@ -9,13 +9,13 @@ jobs:
       matrix:
         os: [ubuntu-18.04, macos-11, windows-latest]
     runs-on: ${{ matrix.os }}
-    name: Build on ${{ matrix.os }}      
+    name: Build on ${{ matrix.os }}
     steps:
       - name: Check out the vscode repository
         run: git clone https://github.com/gitpod-io/vscode --depth=1 --branch web-server
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
       - name: Set cache key (Linux & macOS)
         if: runner.os != 'Windows'
         working-directory: vscode/
@@ -74,8 +74,8 @@ jobs:
         id: archive
         with:
           cond: ${{ runner.os == 'Windows' }}
-          if_true: 'zip'
-          if_false: 'tar.gz'
+          if_true: "zip"
+          if_false: "tar.gz"
       - name: Set environment variables (Linux & macOS)
         if: runner.os != 'Windows'
         run: |
@@ -118,15 +118,17 @@ jobs:
           path: ${{ env.ARCHIVE_FULL_NAME }}
   arch-build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [aarch64, armv7]
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
         name: Run commands
         id: runcmd
         with:
-          arch: armv7
+          arch: ${{ matrix.arch }}
           distro: ubuntu18.04
-
           dockerRunArgs: |
             --volume "${PWD}/artifacts:/artifacts"
           run: |
