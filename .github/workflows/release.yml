@@ -118,7 +118,7 @@ jobs:
           path: ${{ env.ARCHIVE_FULL_NAME }}
   arch-build:
     runs-on: ubuntu-latest
-    name: Build on Linux ({{ matrix.arch }})
+    name: Build on Linux (${{ matrix.arch }})
     strategy:
       matrix:
         arch: [aarch64, armv7]
