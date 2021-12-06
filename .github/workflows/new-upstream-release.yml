@@ -16,7 +16,7 @@ jobs:
 
       - name: Check for new release branch
         id: new-release
-        uses: actions/github-script@v5
+        uses: actions/github-script@latest
         with:
           result-encoding: string
           script: |
