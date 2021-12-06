@@ -16,7 +16,7 @@ jobs:
 
       - name: Check for new release branch
         id: new-release
-        uses: actions/github-script@v5
+        uses: actions/github-script@latest
         with:
           result-encoding: string
           script: |
@@ -45,7 +45,7 @@ jobs:
                 repo: 'openvscode-server',
                 branch: nextRelease
               });
-              upstreamReleaseBranch = reponse.data;
+              upstreamReleaseBranch = response.data;
               console.log(upstreamReleaseBranch);
             } catch (e) {
               console.error(e);
@@ -59,7 +59,7 @@ jobs:
                 repo: 'openvscode-server',
                 branch: nextRelease
               });
-              releaseBranch = reponse.data;
+              releaseBranch = response.data;
             } catch (e) {
               console.log(e);
             }
