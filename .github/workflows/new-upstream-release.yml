@@ -25,8 +25,8 @@ jobs:
             let nextRelease = undefined;
             try {
               const { data: latestRelease } = await github.rest.repos.getLatestRelease({
-                owner: 'microsoft',
-                repo: 'vscode'
+                owner: 'gitpod-io',
+                repo: 'openvscode-server'
               });
 
               const releaseTag = latestRelease.tag_name;
@@ -41,8 +41,8 @@ jobs:
             let upstreamReleaseBranch = undefined;
             try {
               const response = await github.rest.repos.getBranch({
-                owner: 'microsoft',
-                repo: 'vscode',
+                owner: 'gitpod-io',
+                repo: 'openvscode-server',
                 branch: nextRelease
               });
               upstreamReleaseBranch = response.data;
@@ -55,7 +55,7 @@ jobs:
             let releaseBranch = undefined;
             try {
               const response = await github.rest.repos.getBranch({
-                owner: 'gitpod-io',
+                owner: 'cmcc-ict',
                 repo: 'openvscode-server',
                 branch: nextRelease
               });
@@ -67,8 +67,9 @@ jobs:
             // If we already created the release branch in openvscode-server, don't create a notification
             return releaseBranch ? false : true;
 
-      - name: Slack Notification
+      - name: onemessage robot message
         if: steps.new-release.outputs.result == 'true'
+<<<<<<< HEAD
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -169,3 +170,10 @@ jobs:
           SLACK_COLOR: ${{ job.status }}
           SLACK_TITLE: New commits on latest release branch
           SLACK_MESSAGE: 'Start preparing for a new recovery release :exclamation:'
+=======
+        uses: cmcc-ict/onemessage-notify-action@master
+        with:
+          url: http://117.132.184.53:9005/room/pushToRobot
+          robotKey: ${{ secrets.ROBOT_KEY}}
+          msg : 'New vscode release branch created\nStart preparing for a new release :exclamation:' 
+>>>>>>> 17ad48d (update  Notify new upstream release)
