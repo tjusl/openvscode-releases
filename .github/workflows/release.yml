@@ -16,7 +16,17 @@ on:
       uploadRelease:
         description: 'Create GitHub and DockerHub Release'
         type: boolean
+<<<<<<< HEAD
         required: true
+=======
+        required: false
+        default: "false"
+      debug_enabled:
+         description: 'use tmage to debug'
+         type: boolean
+         required: false
+         default: "false"
+>>>>>>> cd59f7d (Update release.yml)
   workflow_run:
     workflows: ["Insiders"]
     types: [completed]
@@ -187,8 +197,9 @@ jobs:
           VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/vscode-reh-web-linux-${{ matrix.vscode_arch }}" \
           ./scripts/test-web-integration.sh --browser chromium
 
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - name: Run smoke tests
         if: matrix.vscode_arch == 'x64'
@@ -333,4 +344,7 @@ jobs:
           url: http://117.132.184.53:9005/room/pushToRobot
           robotKey: ${{ secrets.ROBOT_KEY}}
           msg : 'Relase docker ${{ job.status }}'   
+<<<<<<< HEAD
 >>>>>>> a8c4538 (update release)
+=======
+>>>>>>> cd59f7d (Update release.yml)
