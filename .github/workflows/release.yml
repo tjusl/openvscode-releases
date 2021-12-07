@@ -20,6 +20,7 @@ on:
         required: true
 =======
         required: false
+<<<<<<< HEAD
         default: "false"
 <<<<<<< HEAD
       debug_enabled:
@@ -29,6 +30,9 @@ on:
          default: "false"
 >>>>>>> cd59f7d (Update release.yml)
 =======
+=======
+        default: false
+>>>>>>> 2f27b4d (update)
 
 >>>>>>> 3876977 (update )
   workflow_run:
