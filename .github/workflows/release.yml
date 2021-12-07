@@ -187,6 +187,9 @@ jobs:
           VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/vscode-reh-web-linux-${{ matrix.vscode_arch }}" \
           ./scripts/test-web-integration.sh --browser chromium
 
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
+
       - name: Run smoke tests
         if: matrix.vscode_arch == 'x64'
         working-directory: ./openvscode-server
