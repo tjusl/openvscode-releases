@@ -21,12 +21,16 @@ on:
 =======
         required: false
         default: "false"
+<<<<<<< HEAD
       debug_enabled:
          description: 'use tmage to debug'
          type: boolean
          required: false
          default: "false"
 >>>>>>> cd59f7d (Update release.yml)
+=======
+
+>>>>>>> 3876977 (update )
   workflow_run:
     workflows: ["Insiders"]
     types: [completed]
@@ -196,10 +200,6 @@ jobs:
           set -e
           VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/vscode-reh-web-linux-${{ matrix.vscode_arch }}" \
           ./scripts/test-web-integration.sh --browser chromium
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ matrix.vscode_arch == 'x64' && github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - name: Run smoke tests
         if: ${{ false && matrix.vscode_arch == 'x64' }}
