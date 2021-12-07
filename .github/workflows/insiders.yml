@@ -62,7 +62,7 @@ jobs:
         run: |
           wget -O /tmp/__sync.sh https://raw.githubusercontent.com/cmcc-ict/openvscode-releases/main/scripts/sync-with-upstream.sh
           chmod +x /tmp/__sync.sh
-          /tmp/__sync.sh  ${{ env.PARENT_COMMIT }} ${{ env.UPDATE_BRANCH }} "cmict code web server initial commit" true
+          /tmp/__sync.sh  $(pwd) ${{ env.PARENT_COMMIT }} ${{ env.UPDATE_BRANCH }} "cmict code web server initial commit" true
 
       - name: Compute node modules cache key
         id: nodeModulesCacheKey
