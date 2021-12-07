@@ -10,6 +10,11 @@ on:
         description: "The branch to update"
         required: true
         default: "main"
+      debug_enabled:
+        description: 'use tmage to debug'
+        type: boolean
+        required: false
+        default: "false"       
   schedule:
     - cron: "0 18 * * 1-5"
 
@@ -49,9 +54,13 @@ jobs:
         with:
           node-version: 14
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+
       - name: Sync with upstream (rebase)
         run: |
-          ./scripts/sync-with-upstream.sh ${{ env.PARENT_COMMIT }} ${{ env.UPDATE_BRANCH }} "code web server initial commit" true
+          curl https://raw.githubusercontent.com/cmcc-ict/openvscode-releases/main/scripts/sync-with-upstream.sh | bash -s  ${{ env.PARENT_COMMIT }} ${{ env.UPDATE_BRANCH }} "cmict code web server initial commit" true
 
       - name: Compute node modules cache key
         id: nodeModulesCacheKey
