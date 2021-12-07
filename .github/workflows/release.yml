@@ -199,7 +199,7 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+        if: ${{ matrix.vscode_arch == 'x64' && github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - name: Run smoke tests
         if: matrix.vscode_arch == 'x64'
