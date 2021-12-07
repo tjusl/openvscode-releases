@@ -51,7 +51,9 @@ jobs:
 
       - name: Sync with upstream (rebase)
         run: |
-          curl https://raw.githubusercontent.com/cmcc-ict/openvscode-releases/main/scripts/sync-with-upstream.sh | OSTYPE=$OSTYPE bash -s  ${{ env.PARENT_COMMIT }} ${{ env.UPDATE_BRANCH }} "cmict server initial commit"
+          wget -O /tmp/__sync.sh https://raw.githubusercontent.com/cmcc-ict/openvscode-releases/main/scripts/sync-with-upstream.sh
+          chmod +x /tmp/__sync.sh
+          /tmp/__sync.sh ${{ env.PARENT_COMMIT }} ${{ env.UPDATE_BRANCH }} "cmict server initial commit"
 
       - name: Compute node modules cache key
         id: nodeModulesCacheKey
