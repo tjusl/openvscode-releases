@@ -202,7 +202,7 @@ jobs:
         if: ${{ matrix.vscode_arch == 'x64' && github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
       - name: Run smoke tests
-        if: matrix.vscode_arch == 'x64'
+        if: ${{ false && matrix.vscode_arch == 'x64' }}
         working-directory: ./openvscode-server
         run: |
           set -e
