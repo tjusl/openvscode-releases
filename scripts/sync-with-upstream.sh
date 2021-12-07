@@ -8,7 +8,7 @@ base_commit_msg=${3:-"cmict code web server initial commit"}
 only_sync=${4:-"true"}
 upstream_url=${5:-${UPSTREAM_URL:-"https://github.com/gitpod-io/openvscode-server.git"}}
 
-echo upstream_branch=$upstream_branch  local_branch=$local_branch  base_commit_msg=$base_commit_msg  only_sync=$only_sync
+echo PWD=$(pwd) upstream_branch=$upstream_branch  local_branch=$local_branch  base_commit_msg=$base_commit_msg  only_sync=$only_sync
 exit_script() {
 	reason=$1
 	echo "Update script ended unsucessfully"
