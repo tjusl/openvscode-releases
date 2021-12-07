@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 echo "Syncing openvscode-server with upstream"
-
-upstream_branch=${1:-"upstream/main"}
-local_branch=${2:-"main"}
-base_commit_msg=${3:-"cmict code web server initial commit"}
-only_sync=${4:-"true"}
-upstream_url=${5:-${UPSTREAM_URL:-"https://github.com/gitpod-io/openvscode-server.git"}}
+gitpath=${1:-$(pwd)}
+upstream_branch=${2:-"upstream/main"}
+local_branch=${3:-"main"}
+base_commit_msg=${4:-"cmict code web server initial commit"}
+only_sync=${5:-"true"}
+upstream_url=${6:-${UPSTREAM_URL:-"https://github.com/gitpod-io/openvscode-server.git"}}
 
 echo PWD=$(pwd) upstream_branch=$upstream_branch  local_branch=$local_branch  base_commit_msg=$base_commit_msg  only_sync=$only_sync
 exit_script() {
@@ -15,6 +15,16 @@ exit_script() {
 	echo "Reason: $reason"
 	exit 1
 }
+
+# if [[ "$OSTYPE" == "darwin"* ]]; then
+# 	realpath() { [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"; }
+# 	ROOT=$(dirname $(dirname $(realpath "$0")))
+# else
+# 	ROOT=$(dirname $(dirname $(readlink -f $0)))
+# 	# --disable-dev-shm-usage --use-gl=swiftshader: when run on docker containers where size of /dev/shm
+# 	# partition < 64MB which causes OOM failure for chromium compositor that uses the partition for shared memory
+# 	LINUX_EXTRA_ARGS="--disable-dev-shm-usage --use-gl=swiftshader"
+# fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	realpath() { [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"; }
@@ -63,7 +73,7 @@ sync() {
 	echo "$local_branch sucessfully updated"
 }
 
-cd $ROOT
+cd ${gitpath:-${ROOT}}
 
 # Sync
 check_upstream
