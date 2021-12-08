@@ -7,8 +7,13 @@ RUN apt update && \
 WORKDIR /home/
 
 ARG RELEASE_TAG
+<<<<<<< HEAD
 ARG RELEASE_ORG="gitpod-io"
 ARG OPENVSCODE_SERVER_ROOT="/home/.openvscode-server"
+=======
+ARG RELEASE_ORG="cmcc-ict"
+ARG OPENVSCODE_SERVER_ROOT="/home/${RELEASE_TAG}"
+>>>>>>> e576bad (Update Dockerfile)
 
 # Downloading the latest VSC Server release and extracting the release archive
 # Rename `openvscode-server` cli tool to `code` for convenience
