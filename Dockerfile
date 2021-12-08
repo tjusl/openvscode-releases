@@ -7,7 +7,7 @@ RUN apt update && \
 WORKDIR /home/
 
 ARG RELEASE_TAG
-ARG RELEASE_ORG="gitpod-io"
+ARG RELEASE_ORG="cmcc-ict"
 ARG OPENVSCODE_SERVER_ROOT="/home/${RELEASE_TAG}"
 
 # Downloading the latest VSC Server release and extracting the release archive
