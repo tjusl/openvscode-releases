@@ -64,9 +64,9 @@ jobs:
         with:
           node-version: 14
 
-      - name: Setup tmate session
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
-        uses: mxschmitt/action-tmate@v3
+ #     - name: Setup tmate session
+ #       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+ #       uses: mxschmitt/action-tmate@v3
         
 
       - name: Sync with upstream (rebase)
