@@ -16,4 +16,4 @@ jobs:
         upstream_repo: https://github.com/gitpod-io/openvscode-releases.git
         upstream_branch: main
         local_branch: main
-        github_token: ${{ secrets.GITPOD_TOKEN }}
+        github_token: ${{ secrets.FETCH_UPSTREAM }}
