@@ -1,3 +1,4 @@
+# 目前在用insiders-gp.yml文件
 name: Insiders
 on:
   workflow_dispatch:
@@ -15,8 +16,13 @@ on:
         type: boolean
         required: false
         default: false       
+<<<<<<< HEAD
   schedule:
     - cron: "0 23 * * 1-5"
+=======
+#  schedule:
+#    - cron: "0 18 * * 1-5"
+>>>>>>> 078ce7b (Update insiders.yml)
 
 env:
   # Default values will be used by cron job
@@ -146,10 +152,10 @@ jobs:
           name: logs-linux-x64
           path: .build/logs
 
-      - name: onemessage Notification
-        if: always()
-        uses: cmcc-ict/onemessage-notify-action@master
-        with:
-          url: http://117.132.184.53:9005/room/pushToRobot
-          robotKey: ${{ secrets.ROBOT_KEY}}
-          msg : 'Insiders ${{ job.status }}' 
+ #     - name: onemessage Notification
+ #       if: always()
+ #       uses: cmcc-ict/onemessage-notify-action@master
+ #       with:
+ #         url: http://117.132.184.53:9005/room/pushToRobot
+ #         robotKey: ${{ secrets.ROBOT_KEY}}
+ #         msg : 'Insiders ${{ job.status }}' 
