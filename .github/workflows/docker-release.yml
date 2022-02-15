@@ -15,8 +15,6 @@ on:
         required: true
       DOCKERHUB_TOKEN:
         required: true
-      SLACK_WEBHOOK:
-        required: true
 
 jobs:
   docker-release:
@@ -71,9 +69,10 @@ jobs:
             RELEASE_TAG=${{ env.RELEASE_TAG }}
           tags: ${{ steps.meta.outputs.tags }}
 
-      - name: Slack Notification
+      - name: onemessage Notification
         if: always()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ job.status }}
+        uses: cmcc-ict/onemessage-notify-action@master
+        with:
+          url: http://117.132.184.53:9005/room/pushToRobot
+          robotKey: ${{ secrets.ROBOT_KEY}}
+          msg : 'Relase docker ${{ job.status }}'   
